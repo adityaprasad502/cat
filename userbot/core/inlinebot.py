@@ -249,7 +249,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
-                    Button.url("MY BIO", "https://t.me/plutoniumx1"),
+                    Button.url("MY BIO", "https://t.me/realnub"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -506,7 +506,7 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("MY BIO", "t.me/plutoniumx1"),
+                Button.url("MY BIO", "t.me/realnub"),
                 Button.url(
                     "CONTACT",
                     "t.me/plutxbot?start",
@@ -525,7 +525,7 @@ async def inline_handler(event):  # sourcery no-metrics
             type="photo",
             title="Plutonium X",
             description="I am not for you!",
-            url="https://t.me/plutoniumx1",
+            url="https://t.me/realnub",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(
