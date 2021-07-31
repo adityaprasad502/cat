@@ -106,10 +106,10 @@ async def bot_start(event):
             start_msg = f"Hey! 👤{mention},\
                         \nI am {my_mention}'s assistant bot.\
                         \nYou can contact to my master from here.\
-                        \n\nPowered by [Plutonium X](https://t.me/plutoniumx1)"
+                        \n\nPowered by [Plutonium X](https://t.me/realnub)"
         buttons = [
             (
-                Button.url("MY BIO", "t.me/plutoniumx1")
+                Button.url("MY BIO", "t.me/realnub")
                 ),
         ]
     else:
