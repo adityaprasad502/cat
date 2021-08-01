@@ -109,7 +109,7 @@ async def bot_start(event):
                         \n\nPowered by [Plutonium X](https://t.me/realnub)"
         buttons = [
             (
-                Button.url("MY BIO", "t.me/realnub")
+                Button.url("𝗠𝗬 𝗕𝗜𝗢", "t.me/realnub")
                 ),
         ]
     else:
