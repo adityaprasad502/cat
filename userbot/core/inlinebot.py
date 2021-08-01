@@ -53,8 +53,8 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"MY ASSISTANT's HELP MENU\
-        \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
+    text = f"𝗠𝗬 𝗔𝗦𝗦𝗜𝗦𝗧𝗔𝗡𝗧'𝘀 𝗛𝗘𝗟𝗣 𝗠𝗘𝗡𝗨\
+        \n𝗖𝗿𝗮𝗳𝘁𝗲𝗱 𝗳𝗼𝗿 {mention}"
     buttons = [
         (
             Button.inline(
@@ -245,7 +245,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
-                    Button.url("MY BIO", "https://t.me/realnub"),
+                    Button.url("𝗠𝗬 𝗕𝗜𝗢", "https://t.me/realnub"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -502,9 +502,9 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("MY BIO", "t.me/realnub"),
+                Button.url("𝗠𝗬 𝗕𝗜𝗢", "t.me/realnub"),
                 Button.url(
-                    "CONTACT",
+                    "𝗖𝗢𝗡𝗧𝗔𝗖𝗧",
                     "t.me/plutxbot?start",
                 ),
             )
@@ -514,13 +514,13 @@ async def inline_handler(event):  # sourcery no-metrics
             url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "I am not for you!", "md"
+            "𝗜 𝗮𝗺 𝗻𝗼𝘁 𝗳𝗼𝗿 𝘆𝗼𝘂!", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
-            title="Plutonium X",
-            description="I am not for you!",
+            title="𝗣𝗹𝘂𝘁𝗼𝗻𝗶𝘂𝗺 𝗫",
+            description="𝗜 𝗮𝗺 𝗻𝗼𝘁 𝗳𝗼𝗿 𝘆𝗼𝘂!",
             url="https://t.me/realnub",
             thumb=photo,
             content=photo,
