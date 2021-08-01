@@ -514,13 +514,13 @@ async def inline_handler(event):  # sourcery no-metrics
             url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "I am not for you!", "md"
+            "𝗜 𝗮𝗺 𝗻𝗼𝘁 𝗳𝗼𝗿 𝘆𝗼𝘂!", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
-            title="Plutonium X",
-            description="I am not for you!",
+            title="𝗣𝗹𝘂𝘁𝗼𝗻𝗶𝘂𝗺 𝗫",
+            description="𝗜 𝗮𝗺 𝗻𝗼𝘁 𝗳𝗼𝗿 𝘆𝗼𝘂!",
             url="https://t.me/realnub",
             thumb=photo,
             content=photo,
