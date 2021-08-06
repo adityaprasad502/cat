@@ -121,5 +121,5 @@ async def _(event):
         await catevent.edit(
             f"**link: ** [telegraph]({cat})\
                  \n**Time Taken: **`{ms} seconds.`",
-            link_preview=Flase,
+            link_preview=False,
         )
