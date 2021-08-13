@@ -73,7 +73,7 @@ async def app_search(event):
         app_details += "\n<code>Rating:</code> " + app_rating.replace(
             "Rated ", " "
         ).replace(" out of ", "/").replace(" stars", "", 1).replace(
-            " stars", "⭐ "
+            " stars", " ⭐ "
         ).replace(
             "five", "5"
         )
