@@ -56,53 +56,35 @@ def main_menu():
     text = f"𝗠𝗬 𝗔𝗦𝗦𝗜𝗦𝗧𝗔𝗡𝗧'𝘀 𝗛𝗘𝗟𝗣 𝗠𝗘𝗡𝗨\
         \n𝗖𝗿𝗮𝗳𝘁𝗲𝗱 𝗳𝗼𝗿 {mention}"
     buttons = [
+        (Button.inline('ℹ️ Info', data="check"),),
         (
             Button.inline(
-                f"ℹ️ Info",
-                data="check",
+                f"👮‍♂️ Admin ({len(GRP_INFO['admin'])})", data='admin_menu'
+            ),
+            Button.inline(f"🤖 Bot ({len(GRP_INFO['bot'])})", data='bot_menu'),
+        ),
+        (
+            Button.inline(f"🎨 Fun ({len(GRP_INFO['fun'])})", data='fun_menu'),
+            Button.inline(
+                f"🧩 Misc ({len(GRP_INFO['misc'])})", data='misc_menu'
             ),
         ),
         (
             Button.inline(
-                f"👮‍♂️ Admin ({len(GRP_INFO['admin'])})",
-                data=f"admin_menu",
+                f"🧰 Tools ({len(GRP_INFO['tools'])})", data='tools_menu'
             ),
             Button.inline(
-                f"🤖 Bot ({len(GRP_INFO['bot'])})",
-                data=f"bot_menu",
+                f"🗂 Utils ({len(GRP_INFO['utils'])})", data='utils_menu'
             ),
         ),
         (
             Button.inline(
-                f"🎨 Fun ({len(GRP_INFO['fun'])})",
-                data=f"fun_menu",
+                f"➕ Extra ({len(GRP_INFO['extra'])})", data='extra_menu'
             ),
-            Button.inline(
-                f"🧩 Misc ({len(GRP_INFO['misc'])})",
-                data=f"misc_menu",
-            ),
-        ),
-        (
-            Button.inline(
-                f"🧰 Tools ({len(GRP_INFO['tools'])})",
-                data=f"tools_menu",
-            ),
-            Button.inline(
-                f"🗂 Utils ({len(GRP_INFO['utils'])})",
-                data=f"utils_menu",
-            ),
-        ),
-        (
-            Button.inline(
-                f"➕ Extra ({len(GRP_INFO['extra'])})",
-                data=f"extra_menu",
-            ),
-            Button.inline(
-                f"🔒 Close Menu",
-                data=f"close",
-            ),
+            Button.inline('🔒 Close Menu', data='close'),
         ),
     ]
+
     return text, buttons
 
 
