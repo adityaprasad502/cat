@@ -127,9 +127,9 @@ async def bot_start(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"**Error**\nThere was a error while user starting your bot.\
-                \n`{str(e)}`",
+                f"**Error**\nThere was a error while user starting your bot.\\\x1f                \n`{e}`",
             )
+
     else:
         await check_bot_started_users(chat, event)
 
@@ -172,12 +172,12 @@ async def bot_pms(event):  # sourcery no-metrics
                     )
                 else:
                     msg = await event.client.send_message(
-                        user_id, event.text, reply_to=reply_msg
+                        user_id, event.text, reply_to=reply_msg, link_preview=False
                     )
             except UserIsBlockedError:
                 return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
             except Exception as e:
-                return await event.reply(f"**Error:**\n`{str(e)}`")
+                return await event.reply(f"**Error:**\n`{e}`")
             try:
                 add_user_to_db(
                     reply_to, user_name, user_id, reply_msg, event.id, msg.id
@@ -187,7 +187,7 @@ async def bot_pms(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                        f"**Error**\nWhile storing messages details in database\n`{e}`",
                     )
 
 
@@ -219,8 +219,9 @@ async def bot_pms_edit(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                        f"**Error**\nWhile storing messages details in database\n`{e}`",
                     )
+
     else:
         reply_to = await reply_id(event)
         if reply_to is not None:
@@ -284,10 +285,7 @@ async def handler(event):
                 LOGS.error(str(e))
 
 
-@catub.bot_cmd(
-    pattern=f"^/uinfo$",
-    from_users=Config.OWNER_ID,
-)
+@catub.bot_cmd(pattern="^/uinfo$", from_users=Config.OWNER_ID)
 async def bot_start(event):
     reply_to = await reply_id(event)
     if not reply_to:
@@ -338,8 +336,10 @@ async def send_flood_alert(user_) -> None:
         except Exception as e:
             if BOTLOG:
                 await catub.tgbot.send_message(
-                    BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`"
+                    BOTLOG_CHATID,
+                    f"**Error:**\nWhile updating flood count\n`{e}`",
                 )
+
         flood_count = FloodConfig.ALERT[user_.id]["count"]
     else:
         flood_count = FloodConfig.ALERT[user_.id]["count"] = 1
@@ -409,7 +409,7 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     try:
         user = await catub.get_entity(user_id)
     except Exception as e:
-        await c_q.answer(f"Error:\n{str(e)}")
+        await c_q.answer(f"Error:\n{e}")
     else:
         await c_q.answer(f"Banning UserID -> {user_id} ...", alert=False)
         await ban_user_from_bot(user, "Spamming Bot")
@@ -448,9 +448,9 @@ def is_flood(uid: int) -> Optional[bool]:
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
-        return await c_q.answer(f"Bot Antiflood was already disabled.", alert=False)
+        return await c_q.answer("Bot Antiflood was already disabled.", alert=False)
     delgvar("bot_antif")
-    await c_q.answer(f"Bot Antiflood disabled.", alert=False)
+    await c_q.answer("Bot Antiflood disabled.", alert=False)
     await c_q.edit("BOT_ANTIFLOOD is now disabled !")
 
 
@@ -465,9 +465,9 @@ async def antif_on_msg(event):
     user_id = chat.id
     if check_is_black_list(user_id):
         raise StopPropagation
-    elif await is_flood(user_id):
+    if await is_flood(user_id):
         await send_flood_alert(chat)
         FloodConfig.BANNED_USERS.add(user_id)
         raise StopPropagation
-    elif user_id in FloodConfig.BANNED_USERS:
+    if user_id in FloodConfig.BANNED_USERS:
         FloodConfig.BANNED_USERS.remove(user_id)
