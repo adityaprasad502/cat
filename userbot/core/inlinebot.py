@@ -332,10 +332,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newtroll = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("show message 🔐", data=f"troll_{timestamp}")]
+            buttons = [Button.inline("reveal the secret 🔐", data=f"troll_{timestamp}")]
             result = builder.article(
                 title="Troll Message",
-                text=f"Only {sandy} cannot access this message!",
+                text=f"Only {sandy} cannot read this top-secret message!",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -385,7 +385,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [Button.inline("reveal the secret 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
                 title="secret message",
-                text=f"🔒 This is a top-secret message to {sandy}, Only he/she can open and read it.",
+                text=f"🔒 This is a top-secret message to {sandy}, Only he/she can open and read it!",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -405,10 +405,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newhide = {str(timestamp): {"text": query}}
 
-            buttons = [Button.inline("Read Message ", data=f"hide_{timestamp}")]
+            buttons = [Button.inline("reveal the secret 🔐", data=f"hide_{timestamp}")]
             result = builder.article(
                 title="Hidden Message",
-                text=f"✖✖✖",
+                text=f"The below button contains a top-secret message 🤫!",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
