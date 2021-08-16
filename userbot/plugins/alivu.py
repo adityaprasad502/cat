@@ -40,13 +40,13 @@ async def amireallyalive(event):
     if CAT_IMG:
         CAT = [x for x in CAT_IMG.split()]
         PIC = random.choice(CAT)
-        cat_caption = f"┏━━━━━━━━━━━━━━┓\n"
-        cat_caption += f"┃**私は生きています**\n"
+        cat_caption = "┏━━━━━━━━━━━━━━┓\n"
+        cat_caption += "┃**私は生きています**\n"
         cat_caption += f"┃**{EMOJI} Sama : {mention}**\n"
         cat_caption += f"┃**{EMOJI} telethon._version_:** `{version.__version__}\n`"
         cat_caption += f"┃**{EMOJI} catub -v :** `{catversion}`\n"
         cat_caption += f"┃**{EMOJI} python3 -V :** `{python_version()}\n`"
-        cat_caption += f"┗━━━━━━━━━━━━━━┛"
+        cat_caption += "┗━━━━━━━━━━━━━━┛"
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
