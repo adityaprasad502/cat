@@ -161,7 +161,7 @@ async def on_afk(event):  # sourcery no-metrics
                 Config.PM_LOGGER_GROUP_ID,
                 resalt,
                 parse_mode="html",
-                link_preview=False,
+                link_preview=True,
             )
 
 
