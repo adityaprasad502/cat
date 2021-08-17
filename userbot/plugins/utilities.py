@@ -1,5 +1,7 @@
 import asyncio
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+
 from userbot import catub
 
 plugin_category = "utils"
@@ -31,8 +33,9 @@ async def _(event):
         await asyncio.sleep(1)
         t -= 1
     await event.reply(f"Countdown for {total} seconds completed")
-    
-#t.me/Lal_Bakthan
+
+
+# t.me/Lal_Bakthan
 @catub.cat_cmd(
     pattern="cid ([\s\S]*)",
     command=("cid", plugin_category),
@@ -76,4 +79,5 @@ async def _(event):
         )
     await event.client.delete_messages(conv.chat_id, [start_msg.id, check.id])
 
-#@realnub
+
+# @realnub
