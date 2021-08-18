@@ -133,7 +133,7 @@ async def on_afk(event):  # sourcery no-metrics
             else:
                 message_to_reply = f"**I am AFK!\nLast seen {endtime} ago.**"
             if event.chat_id:
-                msg = await event.reply(message_to_reply)
+                msg = await event.reply(message_to_reply, link_preview=True)
         if event.chat_id in AFK_.last_afk_message:
             await AFK_.last_afk_message[event.chat_id].delete()
         AFK_.last_afk_message[event.chat_id] = msg
@@ -161,7 +161,7 @@ async def on_afk(event):  # sourcery no-metrics
                 Config.PM_LOGGER_GROUP_ID,
                 resalt,
                 parse_mode="html",
-                link_preview=True,
+                link_preview=False,
             )
 
 
