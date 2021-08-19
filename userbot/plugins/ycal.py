@@ -5,7 +5,6 @@ from userbot import catub
 
 plugin_category = "utils"
 
-
 @catub.cat_cmd(
     pattern="ycal (.*)",
     command=("ycal", plugin_category),
@@ -23,4 +22,4 @@ async def _(event):
         cal = calendar.calendar(int(year))
         await edit_or_reply(event, f"`{cal}`")
     except Exception as e:
-        await edit_delete(event, f"`{e}`", 15)
+        await edit_delete(event, f"`{e}`", 7)
