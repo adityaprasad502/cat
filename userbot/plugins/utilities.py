@@ -1,4 +1,5 @@
-import asyncio, calendar
+import asyncio
+import calendar
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
@@ -21,21 +22,24 @@ async def _(event):
     if event.fwd_from:
         return
     try:
-     total = event.pattern_match.group(1)
-     if not total:
-         await edit_delete(event, "What I am supposed to do? Gime time in seconds.", 7)
-         return
-     t = int(total)
-     pluto = await edit_or_reply(event, f"Counter Starting for {total} seconds.")
-     while t >= 0:
-         mins, secs = divmod(t, 60)
-         timer = "{:02d}:{:02d}".format(mins, secs)
-         await pluto.edit(str(timer))
-         await asyncio.sleep(1)
-         t -= 1
-     await event.reply(f"Countdown for {total} seconds completed.")
+        total = event.pattern_match.group(1)
+        if not total:
+            await edit_delete(
+                event, "What I am supposed to do? Gime time in seconds.", 7
+            )
+            return
+        t = int(total)
+        pluto = await edit_or_reply(event, f"Counter Starting for {total} seconds.")
+        while t >= 0:
+            mins, secs = divmod(t, 60)
+            timer = "{:02d}:{:02d}".format(mins, secs)
+            await pluto.edit(str(timer))
+            await asyncio.sleep(1)
+            t -= 1
+        await event.reply(f"Countdown for {total} seconds completed.")
     except Exception as e:
-       await edit_delete(event, f"`{e}`", 7)
+        await edit_delete(event, f"`{e}`", 7)
+
 
 async def purge(event, chat, from_message):
     itermsg = event.client.iter_messages(chat, min_id=from_message.id)
@@ -44,6 +48,7 @@ async def purge(event, chat, from_message):
         msgs.append(i.id)
     await event.client.delete_messages(chat, msgs)
     await event.client.send_read_acknowledge(chat)
+
 
 # t.me/Lal_Bakthan
 @catub.cat_cmd(
@@ -68,7 +73,7 @@ async def _(event):
         return
     catevent = await edit_or_reply(event, f"__Processing...__")
     chat = "@RespawnRobot"
-    reply_id_ = await reply_id(event)
+    await reply_id(event)
     async with event.client.conversation(chat) as conv:
         try:
             start_msg = await conv.send_message("/start")
@@ -103,5 +108,6 @@ async def _(event):
         await edit_or_reply(event, f"`{cal}`")
     except Exception as e:
         await edit_delete(event, f"`{e}`", 7)
+
 
 # @realnub
