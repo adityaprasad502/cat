@@ -1,5 +1,6 @@
-from userbot import catub
 import asyncio
+
+from userbot import catub
 
 plugin_category = "utils"
 
@@ -18,21 +19,24 @@ async def _(event):
     if event.fwd_from:
         return
     try:
-     total = event.pattern_match.group(1)
-     if not total:
-         await edit_delete(event, "What I am supposed to do? Gime time in seconds.", 7)
-         return
-     t = int(total)
-     pluto = await edit_or_reply(event, f"Counter Starting for {total} seconds.")
-     while t >= 0:
-         mins, secs = divmod(t, 60)
-         timer = "{:02d}:{:02d}".format(mins, secs)
-         await pluto.edit(str(timer))
-         await asyncio.sleep(1)
-         t -= 1
-     await event.reply(f"Countdown for {total} seconds completed.")
+        total = event.pattern_match.group(1)
+        if not total:
+            await edit_delete(
+                event, "What I am supposed to do? Gime time in seconds.", 7
+            )
+            return
+        t = int(total)
+        pluto = await edit_or_reply(event, f"Counter Starting for {total} seconds.")
+        while t >= 0:
+            mins, secs = divmod(t, 60)
+            timer = "{:02d}:{:02d}".format(mins, secs)
+            await pluto.edit(str(timer))
+            await asyncio.sleep(1)
+            t -= 1
+        await event.reply(f"Countdown for {total} seconds completed.")
     except Exception as e:
-       await edit_delete(event, f"`{e}`", 7)
+        await edit_delete(event, f"`{e}`", 7)
+
 
 async def purge(event, chat, from_message):
     itermsg = event.client.iter_messages(chat, min_id=from_message.id)
@@ -42,4 +46,5 @@ async def purge(event, chat, from_message):
     await event.client.delete_messages(chat, msgs)
     await event.client.send_read_acknowledge(chat)
 
-#@realnub
+
+# @realnub

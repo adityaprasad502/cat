@@ -1,6 +1,9 @@
 import asyncio
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+
 from userbot import catub
+
 plugin_category = "utils"
 
 # t.me/sandy1709
@@ -11,6 +14,7 @@ async def purge(event, chat, from_message):
         msgs.append(i.id)
     await event.client.delete_messages(chat, msgs)
     await event.client.send_read_acknowledge(chat)
+
 
 # t.me/Lal_Bakthan
 @catub.cat_cmd(
@@ -49,5 +53,6 @@ async def _(event):
             return
         await catevent.edit(details)
     await purge(event, chat, start_msg)
+
 
 # t.me/realnub

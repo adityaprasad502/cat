@@ -5,6 +5,7 @@ from userbot import catub
 
 plugin_category = "utils"
 
+
 @catub.cat_cmd(
     pattern="ycal (.*)",
     command=("ycal", plugin_category),
