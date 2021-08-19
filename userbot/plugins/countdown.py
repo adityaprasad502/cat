@@ -10,12 +10,12 @@ plugin_category = "utils"
     command=("countdown", plugin_category),
     info={
         "header": "countdown till 0 from given seconds.",
-        "description": "countdown till 0 from given seconds.\n\n**⚠️ Warning: Use this plugin at your own risk.**",
-        "usage": "{tr}countdown <seconds>",
+        "description": "countdown till 0 from given seconds.**",
+        "usage": "{tr}countdown <seconds>\n\n**⚠️ Warning: Use this plugin at your own risk.",
     },
 )
 async def _(event):
-    "countdown till 0 from given seconds.\n\n**⚠️ Warning: Use this plugin at your own risk**."
+    "countdown till 0 from given seconds."
     if event.fwd_from:
         return
     try:
