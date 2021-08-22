@@ -147,13 +147,13 @@ async def gsearch(q_event):
     pattern="gis ([\s\S]*)",
     command=("gis", plugin_category),
     info={
-        "header": "Google search in image format",
+        "header": "Bing search in image format",
         "usage": "{tr}gis <query>",
         "examples": "{tr}gis cat",
     },
 )
 async def _(event):
-    "To search in google and send result in picture."
+    "To search in bing and send result in picture."
 
 
 @catub.cat_cmd(
@@ -220,8 +220,8 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).seconds
         OUTPUT_STR = """{img_size}
-<b>Possible Related Search : </b> <a href="{prs_url}">{prs_text}</a> 
-<b>More Info : </b> Open this <a href="{the_location}">Link</a> 
+<b>Possible Related Search : </b> <a href="{prs_url}">{prs_text}</a>
+<b>More Info : </b> Open this <a href="{the_location}">Link</a>
 <i>fetched in {ms} seconds</i>""".format(
             **locals()
         )

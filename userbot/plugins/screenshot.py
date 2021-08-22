@@ -60,7 +60,7 @@ async def _(event):
             if not caturl:
                 return await catevent.edit("`The given input is not supported url`")
         if cmd == "gis":
-            inputstr = "https://www.google.com/search?q=" + input_str
+            inputstr = "https://www.bing.com/search?q=" + input_str
         driver.get(inputstr)
         await catevent.edit("`Calculating Page Dimensions`")
         height = driver.execute_script(
