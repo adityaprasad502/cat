@@ -81,7 +81,7 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
                 remwarns=remwarns,
             )
         else:
-            USER_BOT_WARN_ZERO = "**You were spamming @plutoniumx's inbox, henceforth you have been blocked.**"
+            USER_BOT_WARN_ZERO = "**You were spamming @cozyneko's inbox, henceforth you have been blocked.**"
 
         msg = await event.reply(USER_BOT_WARN_ZERO)
         await event.client(functions.contacts.BlockRequest(chat.id))
@@ -203,7 +203,7 @@ async def do_pm_options_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. Though you ignored that message. So,I simply blocked you. Now you can't do anything unless @plutoniumx comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. Though you ignored that message. So,I simply blocked you. Now you can't do anything unless @cozyneko comes online and unblocks you.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -230,7 +230,7 @@ async def do_pm_enquire_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Hey! Have some patience. @plutoniumx has not seen your message yet. \
+        text = """__Hey! Have some patience. @cozyneko has not seen your message yet. \
 He usually responds to people, though idk about some exceptional users.__ \
 __He will respond when he comes online, if he wants to.__ \
 **Please do not spam unless you wish to be blocked and reported.**"""
@@ -252,7 +252,7 @@ __He will respond when he comes online, if he wants to.__ \
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. Though you ignored that message. So, I simply blocked you. Now you can't do anything unless @plutoniumx comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. Though you ignored that message. So, I simply blocked you. Now you can't do anything unless @cozyneko comes online and unblocks you.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -279,7 +279,7 @@ async def do_pm_request_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Hey have some patience. @plutoniumx has not seen your message yet. \
+        text = """__Hey have some patience. @cozyneko has not seen your message yet. \
 He usually responds to everyone, though idk about some exceptional users.__ \
 __He will respond when he comes back online, if he wants to.__ \
 **Please do not spam unless you wish to be blocked and reported.**"""
@@ -301,7 +301,7 @@ __He will respond when he comes back online, if he wants to.__ \
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. Though you ignored me and messaged me. So, i simply blocked you. Now you can't do anything unless @plutoniumx comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. Though you ignored me and messaged me. So, i simply blocked you. Now you can't do anything unless @cozyneko comes online and unblocks you.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -350,7 +350,7 @@ __He will respond when he comes back online, if he wants to.__ \
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. Though you ignored that message. So, I simply blocked you. Now you can't do anything unless @plutoniumx comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. Though you ignored that message. So, I simply blocked you. Now you can't do anything unless @cozyneko comes online and unblocks you.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -378,7 +378,7 @@ async def do_pm_spam_action(event, chat):
             del PMMESSAGE_CACHE[str(chat.id)]
     except Exception as e:
         LOGS.info(str(e))
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. Though you ignored that message. So, I simply blocked you. Now you can't do anything unless @plutoniumx comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. Though you ignored that message. So, I simply blocked you. Now you can't do anything unless @cozyneko comes online and unblocks you.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -475,19 +475,15 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Lol! these options are for users who messages you, not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = "Ok, Now you are accessing the availabe menu of @plutoniumx. \\\x1f__Let's make this smooth and let me know why you are here.__\x1f\x1f**Choose one of the following reasons why you are here:**"
+    text = "Ok, Now you are accessing the availabe menu of @cozyneko. \\\x1f__Let's make this smooth and let me know why you are here.__\x1f\x1f**Choose one of the following reasons why you are here:**"
 
     buttons = [
         (Button.inline(text="To enquire something.", data="to_enquire_something"),),
         (Button.inline(text="To request something.", data="to_request_something"),),
+        (Button.inline(text="To chat with @cozyneko.", data="to_chat_with_my_master"),),
         (
             Button.inline(
-                text="To chat with @plutoniumx.", data="to_chat_with_my_master"
-            ),
-        ),
-        (
-            Button.inline(
-                text="To spam @plutoniumx's inbox.",
+                text="To spam @cozyneko's inbox.",
                 data="to_spam_my_master_inbox",
             ),
         ),
@@ -509,7 +505,7 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Okay. Your request has been registered. Do not spam @plutoniumx's inbox now. \
+    text = """__Okay. Your request has been registered. Do not spam @cozyneko's inbox now. \
 He is busy right now, When he comes online he will check your message and ping you. \
 Then we can extend this conversation more but not right now. Hope you understood.__"""
     sqllist.add_to_list("pmenquire", event.query.user_id)
@@ -530,7 +526,7 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Okay. I have notified @plutoniumx about this. When he comes comes online\
+    text = """__Okay. I have notified @cozyneko about this. When he comes comes online\
  or when he is free he will look into this chat and will ping you so we can have a friendly chat.__\
  **But right now please do not spam here unless you wish to get blocked.** __Hope you understood.__"""
     sqllist.add_to_list("pmrequest", event.query.user_id)

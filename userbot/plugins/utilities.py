@@ -1,12 +1,15 @@
 import asyncio
 import calendar
 
+import bs4
+import requests
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import catub
 
 plugin_category = "utils"
 
+BOT = "@HowGayBot"
 # t.me/Lal_Bakthan
 @catub.cat_cmd(
     pattern="countdown ([\s\S]*)",
@@ -110,4 +113,92 @@ async def _(event):
         await edit_delete(event, f"`{e}`", 7)
 
 
-# @realnub
+@catub.cat_cmd(
+    pattern="gey ([\s\S]*)",
+    command=("gey", plugin_category),
+    info={
+        "header": "try yourself.",
+        "description": "try yourself.",
+        "usage": "{tr}gey <name>.",
+    },
+)
+async def app_search(event):
+    "try yourself"
+    name = event.pattern_match.group(1)
+    event = await edit_or_reply(event, "`Calculating!..`")
+    id = await reply_id(event)
+    try:
+        score = await event.client.inline_query(BOT, name)
+        await score[0].click(event.chat_id, reply_to=id, hide_via=True)
+        await event.delete()
+    except Exception as err:
+        await event.edit(str(err))
+
+
+@catub.cat_cmd(
+    pattern="iapp ([\s\S]*)",
+    command=("iapp", plugin_category),
+    info={
+        "header": "To search any app in playstore via inline.",
+        "description": "Searches the app in the playstore and provides the link to the app in playstore and fetches app details via inline.",
+        "usage": "{tr}iapp <name>",
+    },
+)
+async def app_search(event):
+    "To search any app in playstore via inline."
+    app_name = event.pattern_match.group(1)
+    reply_to_id = await reply_id(event)
+    event = await edit_or_reply(event, "`Searching!..`")
+    try:
+        remove_space = app_name.split(" ")
+        final_name = "+".join(remove_space)
+        page = requests.get(
+            "https://play.google.com/store/search?q=" + final_name + "&c=apps"
+        )
+        str(page.status_code)
+        soup = bs4.BeautifulSoup(page.content, "lxml", from_encoding="utf-8")
+        results = soup.findAll("div", "ZmHEEd")
+        app_name = (
+            results[0].findNext("div", "Vpfmgd").findNext("div", "WsMG1c nnK0zc").text
+        )
+        app_dev = results[0].findNext("div", "Vpfmgd").findNext("div", "KoLSrc").text
+        app_dev_link = (
+            "https://play.google.com"
+            + results[0].findNext("div", "Vpfmgd").findNext("a", "mnKHRc")["href"]
+        )
+        app_rating = (
+            results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "pf5lIe")
+            .find("div")["aria-label"]
+        )
+        app_link = (
+            "https://play.google.com"
+            + results[0]
+            .findNext("div", "Vpfmgd")
+            .findNext("div", "vU6FJ p63iDd")
+            .a["href"]
+        )
+
+        app_details = "**App Name:** " + app_name + "\n**Developer:** "
+        app_details += f"[{app_dev}]({app_dev_link})" + "\n**Rating:**"
+        app_details += (
+            app_rating.replace("Rated ", " ")
+            .replace(" out of ", "/")
+            .replace(" stars", "", 1)
+            .replace(" stars", " ⭐ ")
+            .replace("five", "5")
+        )
+        catinput = "Inline buttons " + app_details
+        catinput += f" [DOWNLOAD]<buttonurl:{app_link}>"
+        results = await event.client.inline_query(Config.TG_BOT_USERNAME, catinput)
+        await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+        await event.delete()
+
+    except IndexError:
+        await event.edit("No result found in search. Please enter **Valid app name**")
+    except Exception as err:
+        await event.edit("Exception Occured:- " + str(err))
+
+
+# t.me/realnub
