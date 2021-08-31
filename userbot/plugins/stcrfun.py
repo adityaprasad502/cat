@@ -33,9 +33,8 @@ async def tgscmd(message):
     await reply.download_media("tgs.tgs")
     await edit_or_reply(message, "`Fixing this sticker...`")
     os.system("lottie_convert.py tgs.tgs json.json")
-    json = open("json.json", "r")
-    jsn = json.read()
-    json.close()
+    with open("json.json", "r") as json:
+        jsn = json.read()
     jsn = (
         jsn.replace("[1]", "[20]")
         .replace("[2]", "[30]")

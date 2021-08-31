@@ -74,7 +74,7 @@ async def _(event):
     if not args:
         await edit_or_reply(event, "What I am supposed to check? Gime a number.")
         return
-    catevent = await edit_or_reply(event, f"__Processing...__")
+    catevent = await edit_or_reply(event, "__Processing...__")
     chat = "@RespawnRobot"
     await reply_id(event)
     async with event.client.conversation(chat) as conv:
