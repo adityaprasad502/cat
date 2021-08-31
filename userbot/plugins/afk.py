@@ -10,7 +10,7 @@ from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
-from . import BOTLOG, BOTLOG_CHATID, mention
+from . import BOTLOG, BOTLOG_CHATID
 
 plugin_category = "utils"
 
@@ -57,10 +57,10 @@ async def set_not_afk(event):
             endtime += f"{h}h {m}m {s}s"
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
-    current_message = (event.message.message)
+    current_message = event.message.message
     if ("SNAP!!" == current_message.upper()) and ("on" in AFK_.USERAFK_ON):
         await event.delete()
-        #if current_message == "SNAP!!":
+        # if current_message == "SNAP!!":
         shite = await event.client.send_message(
             event.chat_id,
             "**I was afk for " + endtime + "**",
@@ -199,8 +199,7 @@ async def _(event):
             AFK_.reason = input_str
             AFK_.msg_link = False
         last_seen_status = await event.client(
-            functions.account.GetPrivacyRequest(
-                types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
@@ -270,8 +269,7 @@ async def _(event):
             AFK_.reason = input_str
             AFK_.msg_link = False
         last_seen_status = await event.client(
-            functions.account.GetPrivacyRequest(
-                types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
