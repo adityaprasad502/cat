@@ -1,9 +1,11 @@
-import os, urllib
+import os
+import urllib
 
 from ..helpers.functions import convert_tosticker, higlighted_text
 from . import catub, deEmojify, edit_delete, reply_id
 
 plugin_category = "fun"
+
 
 @catub.cat_cmd(
     pattern="(|h)pay(?:\s|$)([\s\S]*)",
