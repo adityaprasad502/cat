@@ -258,4 +258,3 @@ async def lastlog(lstlog):
         await lstlog.edit(LFM_LOG_DISABLED)
     else:
         await lstlog.edit(LFM_LOG_ERR)
-
