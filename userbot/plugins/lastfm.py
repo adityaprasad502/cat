@@ -112,7 +112,7 @@ async def get_curr_track(lfmbio):  # sourcery no-metrics
                 environ["oldsong"] = str(LASTFM_.SONG)
                 environ["oldartist"] = str(LASTFM_.ARTIST)
                 if BIO_PREFIX:
-                    lfmbio = f"{BIO_PREFIX} ♬: {LASTFM_.ARTIST} - {LASTFM_.SONG}"
+                    lfmbio = f"{BIO_PREFIX} ♬ {LASTFM_.ARTIST} - {LASTFM_.SONG}"
                 else:
                     lfmbio = f"♬: {LASTFM_.ARTIST} - {LASTFM_.SONG}"
                 try:

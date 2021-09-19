@@ -164,12 +164,12 @@ def paginate_help(
             ] + [
                 (
                     Button.inline("⌫", data=f"{prefix}_prev({modulo_page})_plugin"),
-                    Button.inline("⚙️ Main Menu", data="mainmenu"),
+                    Button.inline("HOME", data="mainmenu"),
                     Button.inline("⌦", data=f"{prefix}_next({modulo_page})_plugin"),
                 )
             ]
         else:
-            pairs = pairs + [(Button.inline("⚙️ Main Menu", data="mainmenu"),)]
+            pairs = pairs + [(Button.inline("HOME", data="mainmenu"),)]
     elif len(pairs) > number_of_rows:
         if category_pgno < 0:
             category_pgno = len(pairs) + category_pgno
@@ -225,7 +225,7 @@ async def inline_handler(event):  # sourcery no-metrics
         if query.startswith("**Catuserbot"):
             buttons = [
                 (
-                    Button.inline("Stats", data="stats"),
+                    Button.inline("𝗦𝗧𝗔𝗧𝗦", data="stats"),
                     Button.url("𝗠𝗬 𝗕𝗜𝗢", "https://t.me/realnub"),
                 )
             ]
@@ -591,9 +591,9 @@ async def inline_handler(event):  # sourcery no-metrics
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
-        (Button.inline("Open Menu", data="mainmenu"),),
+        (Button.inline("OPEN MENU", data="mainmenu"),),
     ]
-    await event.edit("Menu Closed", buttons=buttons)
+    await event.edit("**HELP MENU MINIMIZED.**", buttons=buttons)
 
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
@@ -734,7 +734,7 @@ async def on_plug_in_callback_query_handler(event):
                 "⬅️ Back ",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
-            Button.inline("⚙️ Main Menu", data="mainmenu"),
+            Button.inline("HOME", data="mainmenu"),
         )
     ]
     text = f"**Command :** `{tr}{cmd}`\

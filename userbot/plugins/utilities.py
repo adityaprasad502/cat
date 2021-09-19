@@ -1,10 +1,11 @@
-import asyncio
 import calendar
 import random
+import time
 
 import bs4
 import requests
 from telethon import functions
+from telethon.errors import FloodWaitError
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import catub
@@ -18,34 +19,44 @@ chr = Config.COMMAND_HAND_LER
 GBOT = "@HowGayBot"
 FBOT = "@FsInChatBot"
 
-# t.me/Lal_Bakthan
+# t.me/realnub and t.me/lal_bakthan
 @catub.cat_cmd(
-    pattern="countdown(?:\s|$)([\s\S]*)",
-    command=("countdown", plugin_category),
+    pattern="timer(?:\s|$)([\s\S]*)",
+    command=("timer", plugin_category),
     info={
-        "header": "countdown",
-        "description": "countdown till 0 from given seconds. use at your own risk.",
-        "usage": "{tr}countdown <seconds>",
+        "header": "timer, try yourself",
+        "note": "May not be accurate, especially for DC 5 users.",
+        "description": "Timer like in clock, counts till 0 from given seconds.",
+        "usage": "{tr}timer <seconds>",
     },
 )
 async def _(event):
-    "countdown till 0 from given seconds. use at your own risk."
+    "Timer like in clock, counts till 0 from given seconds."
     if event.fwd_from:
         return
     try:
         total = event.pattern_match.group(1)
         if not total:
-            await edit_delete(event, f"**Usage:** `{chr}countdown <seconds>`", 10)
+            await edit_delete(event, f"**Usage:** `{chr}timer <seconds>`", 10)
             return
         t = int(total)
-        pluto = await edit_or_reply(event, f"Counter Starting for {total} seconds.")
+        pluto = await edit_or_reply(event, "**Starting...**")
         while t >= 0:
+            if t > 300:
+                x = 3
+            else:
+                x = 1
             mins, secs = divmod(t, 60)
-            timer = "{:02d}:{:02d}".format(mins, secs)
-            await pluto.edit(str(timer))
-            await asyncio.sleep(1)
-            t -= 1
-        await event.reply(f"Countdown for {total} seconds completed.")
+            timer = "**{:02d}:{:02d}**".format(mins, secs)
+            try:
+                await pluto.edit(str(timer))
+            except FloodWaitError as e:
+                t -= e.seconds
+                time.sleep(e.seconds)
+            else:
+                time.sleep(x - 0.08)
+                t -= x
+        await pluto.edit(f"**⏱ Time Up!\n⌛️ Time: {total} seconds.**")
     except Exception as e:
         await edit_delete(event, f"`{e}`", 7)
 
@@ -229,10 +240,10 @@ async def _(event):
 async def Gay(event):
     "Chooses a random item in the given options, give a comma ',' to add multiple option"
     osho = event.pattern_match.group(1)
-    if not inp:
+    if not osho:
         return await edit_delete(event, "`What to choose from`", 10)
     options = osho.split(",")
-    await event.edit(f"**Input :** `{inp}`\n**Result :** `{random.choice(options)}`")
+    await event.edit(f"**Input:** `{osho}`\n**Random:** `{random.choice(options)}`")
 
 
 @catub.cat_cmd(

@@ -695,6 +695,7 @@ async def approve_p_m(event):  # sourcery no-metrics
         await edit_delete(
             event,
             f"__Approved to pm__ [{user.first_name}](tg://user?id={user.id})\n**Reason :** __{reason}__",
+            3,
         )
         try:
             PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -716,6 +717,7 @@ async def approve_p_m(event):  # sourcery no-metrics
         await edit_delete(
             event,
             f"[{user.first_name}](tg://user?id={user.id}) __is already in approved list__",
+            3,
         )
 
 
@@ -759,9 +761,10 @@ async def disapprove_p_m(event):
         reason = "Not Mentioned."
     if pmpermit_sql.is_approved(user.id):
         pmpermit_sql.disapprove(user.id)
-        await edit_or_reply(
+        await edit_delete(
             event,
             f"[{user.first_name}](tg://user?id={user.id}) __is disapproved to personal message me.__\n**Reason:**__ {reason}__",
+            3,
         )
     else:
         await edit_delete(
