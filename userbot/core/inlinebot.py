@@ -164,9 +164,9 @@ def paginate_help(
             ] + [
                 (
                     Button.inline("⌫", data=f"{prefix}_prev({modulo_page})_plugin"),
-                    Button.inline("HOME", data="mainmenu"),
                     Button.inline("⌦", data=f"{prefix}_next({modulo_page})_plugin"),
-                )
+                ),
+                (Button.inline(f"HOME", data="mainmenu"),),
             ]
         else:
             pairs = pairs + [(Button.inline("HOME", data="mainmenu"),)]
@@ -182,7 +182,7 @@ def paginate_help(
                     data=f"{prefix}_prev({modulo_page})_command_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
-                    "⬅️ Back ",
+                    "BACK",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
@@ -197,7 +197,7 @@ def paginate_help(
         pairs = pairs + [
             (
                 Button.inline(
-                    "⬅️ Back ",
+                    "BACK",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
             )
@@ -597,6 +597,7 @@ async def on_plug_in_callback_query_handler(event):
 
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
+@check_owner
 async def on_plugin_callback_query_handler(event):
     text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
         \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
@@ -612,9 +613,9 @@ async def on_plugin_callback_query_handler(event):
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     buttons = paginate_help(0, GRP_INFO[category], category)
-    text = f"**Category: **{category}\
-        \n**Total plugins :** {len(GRP_INFO[category])}\
-        \n**Total Commands:** {command_in_category(category)}"
+    text = f"𝗖𝗔𝗧𝗘𝗚𝗢𝗥𝗬: `{category}`\
+        \n𝗧𝗢𝗧𝗔𝗟 𝗣𝗟𝗨𝗚𝗜𝗡𝗦: `{len(GRP_INFO[category])}`\
+        \n𝗧𝗢𝗧𝗔𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦: `{command_in_category(category)}`"
     await event.edit(text, buttons=buttons)
 
 
@@ -630,9 +631,9 @@ async def on_plug_in_callback_query_handler(event):
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
-        text = f"**Category: **`{category}`\
-            \n**Total plugins :** __{len(GRP_INFO[category])}__\
-            \n**Total Commands:** __{command_in_category(category)}__"
+        text = f"𝗖𝗔𝗧𝗘𝗚𝗢𝗥𝗬: `{category}`\
+            \n𝗧𝗢𝗧𝗔𝗟 𝗣𝗟𝗨𝗚𝗜𝗡𝗦: `{len(GRP_INFO[category])}`\
+            \n𝗧𝗢𝗧𝗔𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦: `{command_in_category(category)}`"
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -644,9 +645,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"𝗣𝗟𝗨𝗚𝗜𝗡: `{category}`\
+                \n𝗖𝗔𝗧𝗘𝗚𝗢𝗥𝗬: `{getkey(category)}`\
+                \n𝗧𝗢𝗧𝗔𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦: `{len(PLG_INFO[category])}`"
     await event.edit(text, buttons=buttons)
 
 
@@ -731,7 +732,7 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ Back ",
+                "BACK",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
             Button.inline("HOME", data="mainmenu"),
