@@ -112,7 +112,7 @@ query ($id: Int, $idMal:Int, $search: String, $type: MediaType, $asHtml: Boolean
     }
     format
     status
-    type 
+    type
     description (asHtml: $asHtml)
     startDate {
       year
@@ -226,7 +226,6 @@ async def formatJSON(outData):
     msg += f"\n**Year** : {jsonData['startDate']['year']}"
     msg += f"\n**Score** : {jsonData['averageScore']}"
     msg += f"\n**Duration** : {jsonData['duration']} min\n\n"
-    # https://t.me/catuserbot_support/19496
     cat = f"{jsonData['description']}"
     msg += " __" + re.sub("<br>", "\n", cat) + "__"
     msg = re.sub("<b>", "__**", msg)
@@ -264,7 +263,7 @@ async def anilist_user(input_str):
     stats = textwrap.dedent(
         f"""
 **User name :** [{user_data['name']}]({user_data['siteUrl']})
-**Anilist ID :** `{user_data['id']}` 
+**Anilist ID :** `{user_data['id']}`
 
 **✙  Anime Stats**
 • **Total Anime Watched :** `{user_data["statistics"]["anime"]['count']}`

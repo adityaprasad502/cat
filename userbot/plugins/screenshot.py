@@ -4,6 +4,7 @@ from ..helpers.utils import _format
 Modified by @mrconfused
 """
 
+import asyncio
 import io
 import traceback
 from datetime import datetime
@@ -22,7 +23,7 @@ plugin_category = "utils"
 
 
 @catub.cat_cmd(
-    pattern="ss ([\s\S]*)",
+    pattern="(ss|gis) ([\s\S]*)",
     command=("ss", plugin_category),
     info={
         "header": "To Take a screenshot of a website.",
@@ -36,7 +37,7 @@ async def _(event):
         return await edit_or_reply(
             event, "Need to install Google Chrome. Module Stopping."
         )
-    catevent = await edit_or_reply(event, "`Processing ...`")
+    catevent = await edit_or_reply(event, "`Processing...`")
     start = datetime.now()
     try:
         chrome_options = webdriver.ChromeOptions()
@@ -49,14 +50,18 @@ async def _(event):
         chrome_options.binary_location = Config.CHROME_BIN
         await event.edit("`Starting Google Chrome BIN`")
         driver = webdriver.Chrome(chrome_options=chrome_options)
-        input_str = event.pattern_match.group(1)
+        cmd = event.pattern_match.group(1)
+        input_str = event.pattern_match.group(2)
         inputstr = input_str
-        caturl = url(inputstr)
-        if not caturl:
-            inputstr = "http://" + input_str
+        if cmd == "ss":
             caturl = url(inputstr)
-        if not caturl:
-            return await catevent.edit("`The given input is not supported url`")
+            if not caturl:
+                inputstr = "http://" + input_str
+                caturl = url(inputstr)
+            if not caturl:
+                return await catevent.edit("`The given input is not supported url`")
+        if cmd == "gis":
+            inputstr = "https://www.bing.com/search?q=" + input_str
         driver.get(inputstr)
         await catevent.edit("`Calculating Page Dimensions`")
         height = driver.execute_script(
@@ -66,15 +71,18 @@ async def _(event):
             "return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth);"
         )
         driver.set_window_size(width + 100, height + 100)
+        await catevent.edit("`Taking screenshot...`")
+        await asyncio.sleep(2)
+        await catevent.edit("`Uploading...`")
         # Add some pixels on top of the calculated dimensions
         # for good measure to make the scroll bars disappear
         im_png = driver.get_screenshot_as_png()
         # saves screenshot of entire page
-        await catevent.edit("`Stoppping Chrome Bin`")
         driver.close()
         message_id = await reply_id(event)
         end = datetime.now()
-        ms = (end - start).seconds
+        lol = (end - start).seconds
+        ms = lol - 2
         hmm = f"**url : **{input_str} \n**Time :** `{ms} seconds`"
         await catevent.delete()
         with io.BytesIO(im_png) as out_file:
