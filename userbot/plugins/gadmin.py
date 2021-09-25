@@ -68,16 +68,17 @@ async def catgban(event):  # sourcery no-metrics
     san = await admin_groups(event.client)
     count = 0
     sandy = len(san)
+    total = sandy * 2
     if sandy == 0:
         return await edit_delete(cate, "`you are not admin of atleast one group` ")
     await cate.edit(
-        f"`initiating gban of the `[user](tg://user?id={user.id}) `in {len(san)} groups`"
+        f"`initiating gban of the `[user](tg://user?id={user.id}) `in {total} groups`"
     )
     for i in range(sandy):
         try:
             await event.client(EditBannedRequest(san[i], user.id, BANNED_RIGHTS))
             await asyncio.sleep(0.5)
-            count += 1
+            count += 2
         except BadRequestError:
             achat = await event.client.get_entity(san[i])
             await event.client.send_message(
@@ -150,16 +151,17 @@ async def catgban(event):
     san = await admin_groups(event.client)
     count = 0
     sandy = len(san)
+    total = sandy * 2
     if sandy == 0:
         return await edit_delete(cate, "`you are not even admin of atleast one group `")
     await cate.edit(
-        f"initiating ungban of the [user](tg://user?id={user.id}) in `{len(san)}` groups"
+        f"initiating ungban of the [user](tg://user?id={user.id}) in `{total}` groups"
     )
     for i in range(sandy):
         try:
             await event.client(EditBannedRequest(san[i], user.id, UNBAN_RIGHTS))
             await asyncio.sleep(0.5)
-            count += 1
+            count += 2
         except BadRequestError:
             achat = await event.client.get_entity(san[i])
             await event.client.send_message(
@@ -380,16 +382,17 @@ async def catgkick(event):  # sourcery no-metrics
     san = await admin_groups(event.client)
     count = 0
     sandy = len(san)
+    total = sandy * 2
     if sandy == 0:
         return await edit_delete(cate, "`you are not admin of atleast one group` ")
     await cate.edit(
-        f"`initiating gkick of the `[user](tg://user?id={user.id}) `in {len(san)} groups`"
+        f"`initiating gkick of the `[user](tg://user?id={user.id}) `in {total} groups`"
     )
     for i in range(sandy):
         try:
             await event.client.kick_participant(san[i], user.id)
             await asyncio.sleep(0.5)
-            count += 1
+            count += 2
         except BadRequestError:
             achat = await event.client.get_entity(san[i])
             await event.client.send_message(
